@@ -1,0 +1,55 @@
+Entwickle eine webbasierte Gamification-Plattform für Lehrpersonen mit dem Namen "EduQuest: Lehrkraft-Edition". Die Plattform soll folgende Hauptkomponenten und Funktionen enthalten:
+
+1. MindMaster: Der Selbstfürsorge-Simulator
+   - Erstelle eine interaktive 3D-Visualisierung eines Gehirns mit klickbaren Regionen.
+   - Implementiere für jede Gehirnregion ein Mini-Spiel:
+     a) Präfrontaler Cortex-Puzzle: Logikrätsel zur Priorisierung von Aufgaben
+     b) Hippocampus-Herausforderung: Zeitmanagement-Gedächtnisspiel
+     c) Amygdala-Arena: Emotionsregulierungsspiel mit Deeskalationsszenarien
+   - Integriere ein Fortschrittssystem, das die Verbesserung der Fähigkeiten in jedem Bereich trackt.
+
+2. Ressourcen-Rallye
+   - Entwickle ein Level-basiertes Spiel mit verschiedenen Herausforderungen des Schulalltags:
+     a) Arbeitsbelastungs-Labyrinth: Implementiere einen Pathfinding-Algorithmus mit Priorisierungs-Logik
+     b) Verhaltens-Vortex: Erstelle ein Reaktionsspiel mit positiver Verstärkung und Regelanwendung
+     c) Admin-Archipel: Gestalte eine Inselgruppe mit Aufgaben-Management-Mechanismen
+   - Integriere ein Punktesystem und Bestenlisten für jedes Level.
+
+3. Zen-Zone
+   - Entwickle ein rundenbasiertes Strategiespiel mit folgenden Modi:
+     a) Meditation-Modus: Implementiere Konzentrations-Puzzles mit steigender Schwierigkeit
+     b) Resilienz-Rätsel: Erstelle ein Szenario-basiertes Spiel mit Multiple-Choice-Antworten
+     c) Balance-Battle: Programmiere ein Geschicklichkeitsspiel mit Physik-Engine für das Jonglieren von Elementen
+   - Integriere ein System zur Messung und Visualisierung des "Zen-Levels" des Spielers.
+
+4. Netzwerk-Nexus
+   - Entwickle ein Multiplayer-System mit folgenden Features:
+     a) Ideen-Inkubator: Echtzeit-Kollaborationstool für Ideenaustausch und -kombination
+     b) Mentoring-Maze: Koop-Labyrinth mit asymmetrischen Rollen (Mentor/Mentee)
+     c) Ressourcen-Roulette: Schnelles Austauschsystem für Unterrichtsmaterialien mit Timer
+   - Implementiere ein Reputationssystem für hilfreiche Beiträge und Kooperation.
+
+5. Eltern-Escape-Room
+   - Erstelle einen virtuellen Escape Room mit kommunikationsbasierten Rätseln:
+     a) Empathie-Enigma: Entwickle einen Emoticon-Decoder für elterliche Anliegen
+     b) Feedback-Fabrik: Implementiere ein Wortpuzzle-System für positive Formulierungen
+     c) Protokoll-Parcours: Gestalte ein Labyrinth mit integriertem Notiz-System
+   - Füge einen Timer und ein Punktesystem für erfolgreiche "Fluchten" hinzu.
+
+Allgemeine Anforderungen:
+- Nutze moderne Web-Technologien (z.B. React, Vue.js) für das Frontend.
+- Implementiere eine robuste Backend-Architektur (z.B. Node.js, Python) mit RESTful API.
+- Integriere ein Datenbanksystem (z.B. MongoDB, PostgreSQL) für Benutzerprofile und Fortschrittsspeicherung.
+- Entwickle ein responsives Design für die Nutzung auf verschiedenen Geräten.
+- Implementiere ein Authentifizierungs- und Autorisierungssystem für Benutzerkonten.
+- Erstelle ein übergreifendes Gamification-System mit Levels, Abzeichen und Leaderboards.
+- Integriere Analysetools zur Messung der Nutzung und des Fortschritts der Lehrpersonen.
+- Implementiere Accessibility-Features für eine inklusive Nutzererfahrung.
+- Stelle sicher, dass die Plattform DSGVO-konform ist und Datenschutzrichtlinien einhält.
+
+Zusätzliche Features:
+- Entwickle ein KI-gestütztes Empfehlungssystem, das personalisierte Aktivitäten basierend auf dem Fortschritt und den Herausforderungen der Lehrperson vorschlägt.
+- Integriere ein soziales Netzwerk-Element, das es Lehrpersonen ermöglicht, sich zu vernetzen und Erfahrungen auszutauschen.
+- Implementiere ein System für regelmäßige Content-Updates, um die Plattform mit neuen Herausforderungen und Ressourcen aktuell zu halten.
+
+Bitte generiere den grundlegenden Code-Rahmen für diese Plattform, einschließlich der Hauptkomponenten und ihrer Interaktionen.
