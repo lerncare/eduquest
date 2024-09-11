@@ -2,10 +2,10 @@
 
 {% block content %}
 <h2 class="mt-5">Ressourcen-Rallye: Arbeitsbelastungs-Labyrinth</h2>
-<p>Current Level: {{ progress.level }}</p>
-<p>Score: {{ progress.score }}</p>
+<p>Aktuelles Level: {{ progress.level }}</p>
+<p>Punktzahl: {{ progress.score }}</p>
 <div id="game-container" class="game-container"></div>
-<button id="start-game" class="btn btn-primary mt-3">Start Game</button>
+<button id="start-game" class="btn btn-primary mt-3">Spiel starten</button>
 <div id="result" class="mt-3"></div>
 
 <script src="{{ url_for('static', filename='js/resourcerally.js') }}"></script>

@@ -3,39 +3,39 @@ from flask_login import login_required, current_user
 from models import GameProgress
 from extensions import db
 
-games = Blueprint('games', __name__)
+spiele = Blueprint('games', __name__)
 
-@games.route('/profile')
+@spiele.route('/profil')
 @login_required
-def profile():
+def profil():
     return render_template('profile.html', name=current_user.username)
 
-@games.route('/mindmaster')
+@spiele.route('/mindmaster')
 @login_required
 def mindmaster():
-    progress = GameProgress.query.filter_by(user_id=current_user.id, game_name='mindmaster').first()
-    if not progress:
-        progress = GameProgress(user_id=current_user.id, game_name='mindmaster')
-        db.session.add(progress)
+    fortschritt = GameProgress.query.filter_by(user_id=current_user.id, game_name='mindmaster').first()
+    if not fortschritt:
+        fortschritt = GameProgress(user_id=current_user.id, game_name='mindmaster')
+        db.session.add(fortschritt)
         db.session.commit()
-    return render_template('mindmaster.html', progress=progress)
+    return render_template('mindmaster.html', progress=fortschritt)
 
-@games.route('/resourcerally')
+@spiele.route('/ressourcenrallye')
 @login_required
-def resourcerally():
-    progress = GameProgress.query.filter_by(user_id=current_user.id, game_name='resourcerally').first()
-    if not progress:
-        progress = GameProgress(user_id=current_user.id, game_name='resourcerally')
-        db.session.add(progress)
+def ressourcenrallye():
+    fortschritt = GameProgress.query.filter_by(user_id=current_user.id, game_name='resourcerally').first()
+    if not fortschritt:
+        fortschritt = GameProgress(user_id=current_user.id, game_name='resourcerally')
+        db.session.add(fortschritt)
         db.session.commit()
-    return render_template('resourcerally.html', progress=progress)
+    return render_template('resourcerally.html', progress=fortschritt)
 
-@games.route('/zen_zone')
+@spiele.route('/zen_zone')
 @login_required
 def zen_zone():
-    progress = GameProgress.query.filter_by(user_id=current_user.id, game_name='zen_zone').first()
-    if not progress:
-        progress = GameProgress(user_id=current_user.id, game_name='zen_zone')
-        db.session.add(progress)
+    fortschritt = GameProgress.query.filter_by(user_id=current_user.id, game_name='zen_zone').first()
+    if not fortschritt:
+        fortschritt = GameProgress(user_id=current_user.id, game_name='zen_zone')
+        db.session.add(fortschritt)
         db.session.commit()
-    return render_template('zen_zone.html', progress=progress)
+    return render_template('zen_zone.html', progress=fortschritt)

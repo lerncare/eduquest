@@ -5,27 +5,27 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let scenarios = [
         {
-            situation: "A student becomes disruptive during class.",
+            situation: "Ein Schüler wird während des Unterrichts störend.",
             options: [
-                { text: "Raise your voice and demand silence", score: 0 },
-                { text: "Calmly ask the student to step outside for a moment", score: 2 },
-                { text: "Ignore the behavior and continue teaching", score: 1 }
+                { text: "Die Stimme erheben und Ruhe fordern", score: 0 },
+                { text: "Den Schüler ruhig bitten, kurz nach draußen zu gehen", score: 2 },
+                { text: "Das Verhalten ignorieren und mit dem Unterricht fortfahren", score: 1 }
             ]
         },
         {
-            situation: "A parent angrily complains about their child's grade.",
+            situation: "Ein Elternteil beschwert sich wütend über die Note ihres Kindes.",
             options: [
-                { text: "Defend your grading policy firmly", score: 1 },
-                { text: "Listen actively and offer to review the work together", score: 2 },
-                { text: "Apologize and offer to change the grade", score: 0 }
+                { text: "Die Benotungskriterien entschieden verteidigen", score: 1 },
+                { text: "Aktiv zuhören und anbieten, die Arbeit gemeinsam durchzugehen", score: 2 },
+                { text: "Sich entschuldigen und anbieten, die Note zu ändern", score: 0 }
             ]
         },
         {
-            situation: "Two students start arguing loudly during group work.",
+            situation: "Zwei Schüler beginnen während der Gruppenarbeit laut zu streiten.",
             options: [
-                { text: "Separate the students immediately", score: 1 },
-                { text: "Ask the class to take a short break while you mediate", score: 2 },
-                { text: "Tell them to resolve it themselves or face detention", score: 0 }
+                { text: "Die Schüler sofort trennen", score: 1 },
+                { text: "Die Klasse bitten, eine kurze Pause zu machen, während Sie vermitteln", score: 2 },
+                { text: "Ihnen sagen, sie sollen es selbst lösen oder nachsitzen", score: 0 }
             ]
         }
     ];
@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', function() {
             ).join('');
             
             gameContainer.innerHTML = `
-                <h3>Scenario:</h3>
+                <h3>Szenario:</h3>
                 <p>${scenario.situation}</p>
-                <h4>How would you respond?</h4>
+                <h4>Wie würdest du reagieren?</h4>
                 ${optionsHtml}
             `;
         } else {
@@ -63,19 +63,19 @@ document.addEventListener('DOMContentLoaded', function() {
         score += scenario.options[index].score;
         
         resultDiv.textContent = scenario.options[index].score === 2 ? 
-            "Great choice! That's an effective way to deescalate the situation." :
+            "Großartige Wahl! Das ist ein effektiver Weg, die Situation zu deeskalieren." :
             scenario.options[index].score === 1 ?
-            "That could work, but there might be a better approach." :
-            "Be careful, that approach might escalate the situation.";
+            "Das könnte funktionieren, aber es gibt möglicherweise einen besseren Ansatz." :
+            "Sei vorsichtig, dieser Ansatz könnte die Situation eskalieren.";
         
         currentScenario++;
         setTimeout(displayScenario, 2000);
     }
     
     function endGame() {
-        gameContainer.innerHTML = `<h2>Game Over!</h2><p>Your score: ${score}/${scenarios.length * 2}</p>`;
+        gameContainer.innerHTML = `<h2>Spiel beendet!</h2><p>Deine Punktzahl: ${score}/${scenarios.length * 2}</p>`;
         startButton.style.display = 'block';
-        startButton.textContent = 'Play Again';
+        startButton.textContent = 'Erneut spielen';
     }
     
     startButton.addEventListener('click', startGame);

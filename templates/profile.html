@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2 class="mt-5">Welcome, {{ current_user.username }}!</h2>
-<p>Here's your current progress:</p>
+<h2 class="mt-5">Willkommen, {{ current_user.username }}!</h2>
+<p>Hier ist dein aktueller Fortschritt:</p>
 <ul>
     {% for progress in current_user.game_progress %}
-    <li>{{ progress.game_name }}: Level {{ progress.level }}, Score {{ progress.score }}</li>
+    <li>{{ progress.game_name }}: Level {{ progress.level }}, Punktzahl {{ progress.score }}</li>
     {% endfor %}
 </ul>
-<p>Choose a game to play:</p>
-<a href="{{ url_for('games.mindmaster') }}" class="btn btn-primary">MindMaster</a>
-<a href="{{ url_for('games.resourcerally') }}" class="btn btn-primary">Ressourcen-Rallye</a>
+<p>Wähle ein Spiel zum Spielen:</p>
+<a href="{{ url_for('spiele.mindmaster') }}" class="btn btn-primary">MindMaster</a>
+<a href="{{ url_for('spiele.ressourcenrallye') }}" class="btn btn-primary">Ressourcen-Rallye</a>
+<a href="{{ url_for('spiele.zen_zone') }}" class="btn btn-primary">Zen-Zone</a>
 {% endblock %}

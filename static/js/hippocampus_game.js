@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultDiv = document.getElementById('hippocampus-result');
     
     let tasks = [
-        {name: 'Prepare lesson', duration: 30},
-        {name: 'Grade papers', duration: 45},
-        {name: 'Staff meeting', duration: 60},
-        {name: 'Parent conference', duration: 20},
-        {name: 'Professional development', duration: 90}
+        {name: 'Unterricht vorbereiten', duration: 30},
+        {name: 'Arbeiten korrigieren', duration: 45},
+        {name: 'Lehrerkonferenz', duration: 60},
+        {name: 'Elterngespräch', duration: 20},
+        {name: 'Fortbildung', duration: 90}
     ];
     
     let shuffledTasks = [];
@@ -35,10 +35,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentTask < shuffledTasks.length) {
             const task = shuffledTasks[currentTask];
             gameContainer.innerHTML = `
-                <h3>Task: ${task.name}</h3>
-                <p>Estimate the duration (in minutes):</p>
+                <h3>Aufgabe: ${task.name}</h3>
+                <p>Schätze die Dauer (in Minuten):</p>
                 <input type="number" id="duration-input" min="1" max="120">
-                <button onclick="submitEstimate()">Submit</button>
+                <button onclick="submitEstimate()">Einreichen</button>
             `;
         } else {
             endGame();
@@ -53,12 +53,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (difference <= 5) {
             score += 3;
-            resultDiv.textContent = "Excellent estimate!";
+            resultDiv.textContent = "Ausgezeichnete Schätzung!";
         } else if (difference <= 15) {
             score += 1;
-            resultDiv.textContent = "Good estimate, but there's room for improvement.";
+            resultDiv.textContent = "Gute Schätzung, aber es gibt noch Verbesserungspotenzial.";
         } else {
-            resultDiv.textContent = "Your estimate was off. Try to be more accurate next time.";
+            resultDiv.textContent = "Deine Schätzung war nicht genau. Versuche beim nächsten Mal genauer zu sein.";
         }
         
         currentTask++;
@@ -66,9 +66,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function endGame() {
-        gameContainer.innerHTML = `<h2>Game Over!</h2><p>Your score: ${score}/${shuffledTasks.length * 3}</p>`;
+        gameContainer.innerHTML = `<h2>Spiel beendet!</h2><p>Deine Punktzahl: ${score}/${shuffledTasks.length * 3}</p>`;
         startButton.style.display = 'block';
-        startButton.textContent = 'Play Again';
+        startButton.textContent = 'Erneut spielen';
     }
     
     startButton.addEventListener('click', startGame);

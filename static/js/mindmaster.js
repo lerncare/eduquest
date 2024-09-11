@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitButton = document.getElementById('submit-puzzle');
     const resultDiv = document.getElementById('result');
     
-    let tasks = ['Task 1', 'Task 2', 'Task 3', 'Task 4'];
-    let correctOrder = [2, 0, 3, 1];  // Correct priority order (0-based index)
+    let tasks = ['Aufgabe 1', 'Aufgabe 2', 'Aufgabe 3', 'Aufgabe 4'];
+    let correctOrder = [2, 0, 3, 1];  // Korrekte Prioritätsreihenfolge (0-basierter Index)
     
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
             puzzleContainer.appendChild(taskElement);
         });
         
-        // Add drag and drop functionality
+        // Drag-and-Drop-Funktionalität hinzufügen
         const draggables = document.querySelectorAll('.task');
         draggables.forEach(draggable => {
             draggable.addEventListener('dragstart', dragStart);
@@ -57,10 +57,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const isCorrect = currentOrder.every((task, index) => task === correctOrder[index]);
         
         if (isCorrect) {
-            resultDiv.textContent = "Correct! You've prioritized the tasks correctly.";
+            resultDiv.textContent = "Richtig! Du hast die Aufgaben korrekt priorisiert.";
             resultDiv.style.color = 'green';
         } else {
-            resultDiv.textContent = "Not quite right. Try again!";
+            resultDiv.textContent = "Nicht ganz richtig. Versuche es noch einmal!";
             resultDiv.style.color = 'red';
         }
     }

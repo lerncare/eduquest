@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="{{ url_for('index') }}">EduQuest</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Navigation umschalten">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -20,16 +20,16 @@
                 </li>
                 {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('games.profile') }}">Profil</a>
+                    <a class="nav-link" href="{{ url_for('spiele.profil') }}">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('games.mindmaster') }}">MindMaster</a>
+                    <a class="nav-link" href="{{ url_for('spiele.mindmaster') }}">MindMaster</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('games.resourcerally') }}">Ressourcen-Rallye</a>
+                    <a class="nav-link" href="{{ url_for('spiele.ressourcenrallye') }}">Ressourcen-Rallye</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('games.zen_zone') }}">Zen-Zone</a>
+                    <a class="nav-link" href="{{ url_for('spiele.zen_zone') }}">Zen-Zone</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('auth.logout') }}">Abmelden</a>
