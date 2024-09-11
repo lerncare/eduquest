@@ -29,3 +29,13 @@ def resourcerally():
         db.session.add(progress)
         db.session.commit()
     return render_template('resourcerally.html', progress=progress)
+
+@games.route('/zen_zone')
+@login_required
+def zen_zone():
+    progress = GameProgress.query.filter_by(user_id=current_user.id, game_name='zen_zone').first()
+    if not progress:
+        progress = GameProgress(user_id=current_user.id, game_name='zen_zone')
+        db.session.add(progress)
+        db.session.commit()
+    return render_template('zen_zone.html', progress=progress)
