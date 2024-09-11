@@ -47,6 +47,7 @@ def register_post():
     db.session.add(new_user)
     db.session.commit()
 
+    flash('Dein Konto wurde erstellt. Du bist registriert und kannst dich nun einloggen.')
     return redirect(url_for('auth.login'))
 
 @auth.route('/logout')
