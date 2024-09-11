@@ -135,6 +135,14 @@ args = "Delete Migrations"
 task = "workflow.run"
 args = "Check Clean Database Status"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Clean Database and Migrations"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Clean and Reinitialize Database"
+
 [[workflows.workflow]]
 name = "Run Flask App"
 author = "agent"
@@ -211,7 +219,7 @@ agentRequireRestartOnSave = false
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python drop_tables.py && rm -rf migrations && FLASK_APP=main.py flask db init && FLASK_APP=main.py flask db migrate -m 'Add experience_level to User model' && FLASK_APP=main.py flask db upgrade"
+args = "FLASK_APP=main.py flask db init"
 
 [[workflows.workflow]]
 name = "Clean and Init DB"
@@ -476,6 +484,28 @@ agentRequireRestartOnSave = false
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "echo 'Checking Clean Database Status'"
+
+[[workflows.workflow]]
+name = "Clean Database and Migrations"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python drop_tables.py && rm -rf migrations"
+
+[[workflows.workflow]]
+name = "Clean and Reinitialize Database"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf migrations && FLASK_APP=main.py flask db init"
 
 [deployment]
 run = ["sh", "-c", "python main.py"]
