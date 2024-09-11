@@ -2,6 +2,34 @@
 
 {% block content %}
 <h1 class="mt-5">Willkommen bei EduQuest: Lehrkraft-Edition</h1>
-<p>EduQuest ist eine Gamification-Plattform, die entwickelt wurde, um Lehrern dabei zu helfen, ihre Fähigkeiten zu verbessern und ihre Arbeitsbelastung effektiver zu bewältigen.</p>
-<p>Bitte melden Sie sich an oder registrieren Sie sich, um auf die Spiele zuzugreifen und Ihren Fortschritt zu verfolgen.</p>
+<p class="lead">EduQuest ist eine innovative Gamification-Plattform, die speziell für Lehrkräfte entwickelt wurde. Hier können Sie Ihre pädagogischen Fähigkeiten verbessern, Ihre Arbeitsbelastung effektiver bewältigen und Spaß dabei haben!</p>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <h3>Was erwartet Sie?</h3>
+        <ul>
+            <li>Interaktive Spiele zur Selbstverbesserung</li>
+            <li>Herausforderungen für Zeitmanagement und Stressabbau</li>
+            <li>Möglichkeiten zum Austausch mit anderen Lehrkräften</li>
+            <li>Fortschrittsverfolgung und Belohnungssystem</li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h3>Wie anfangen?</h3>
+        <p>Um Ihre EduQuest-Reise zu beginnen:</p>
+        <ol>
+            <li>Registrieren Sie sich für ein kostenloses Konto</li>
+            <li>Melden Sie sich an und erkunden Sie die verfügbaren Spiele</li>
+            <li>Starten Sie mit dem MindMaster oder der Ressourcen-Rallye</li>
+            <li>Verfolgen Sie Ihren Fortschritt und verbessern Sie Ihre Fähigkeiten</li>
+        </ol>
+    </div>
+</div>
+
+{% if not current_user.is_authenticated %}
+<div class="mt-4">
+    <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg mr-2">Jetzt registrieren</a>
+    <a href="{{ url_for('auth.login') }}" class="btn btn-outline-primary btn-lg">Anmelden</a>
+</div>
+{% endif %}
 {% endblock %}
