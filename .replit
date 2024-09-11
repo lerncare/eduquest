@@ -63,6 +63,54 @@ args = "Create New Migration"
 task = "workflow.run"
 args = "Apply Migration"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "List Migrations"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Reset Migrations"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Reset and Init DB"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Check Alembic Version"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Remove and Check Alembic Version"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Check Migrations"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "List Migration Versions"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Check Migrations Directory"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Check New Migration"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Create Migration with Verbose Output"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Check Migration Files"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Check Table Structure"
+
 [[workflows.workflow]]
 name = "Run Flask App"
 author = "agent"
@@ -139,7 +187,7 @@ agentRequireRestartOnSave = false
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "rm -rf migrations && FLASK_APP=main.py flask db init && FLASK_APP=main.py flask db migrate -m 'Initial migration' && FLASK_APP=main.py flask db upgrade"
+args = "FLASK_APP=main.py flask db init"
 
 [[workflows.workflow]]
 name = "Clean and Init DB"
@@ -194,7 +242,7 @@ agentRequireRestartOnSave = false
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "FLASK_APP=main.py flask db migrate -m 'Increase password_hash length'"
+args = "FLASK_APP=main.py flask db migrate -m 'Initial migration'"
 
 [[workflows.workflow]]
 name = "Apply Migration"
@@ -206,6 +254,149 @@ agentRequireRestartOnSave = false
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "FLASK_APP=main.py flask db upgrade"
+
+[[workflows.workflow]]
+name = "List Migrations"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -l migrations/versions"
+
+[[workflows.workflow]]
+name = "Reset Migrations"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf migrations && FLASK_APP=main.py flask db init"
+
+[[workflows.workflow]]
+name = "Reset and Init DB"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf migrations && FLASK_APP=main.py flask db init"
+
+[[workflows.workflow]]
+name = "Check Alembic Version"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "PGPASSWORD=$PGPASSWORD psql -h $PGHOST -p $PGPORT -U $PGUSER -d $PGDATABASE -c 'SELECT * FROM alembic_version;'"
+
+[[workflows.workflow]]
+name = "Remove and Check Alembic Version"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = """
+
+    PGPASSWORD=$PGPASSWORD psql -h $PGHOST -p $PGPORT -U $PGUSER -d $PGDATABASE -c 'DELETE FROM alembic_version;'
+    PGPASSWORD=$PGPASSWORD psql -h $PGHOST -p $PGPORT -U $PGUSER -d $PGDATABASE -c 'SELECT * FROM alembic_version;'
+    """
+
+[[workflows.workflow]]
+name = "Check Migrations"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -l migrations"
+
+[[workflows.workflow]]
+name = "List Migration Versions"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -l migrations/versions"
+
+[[workflows.workflow]]
+name = "Check Migrations Directory"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -l migrations/versions"
+
+[[workflows.workflow]]
+name = "Check New Migration"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -l migrations/versions"
+
+[[workflows.workflow]]
+name = "Create Migration with Verbose Output"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "FLASK_APP=main.py flask db migrate -m 'Initial migration' --verbose"
+
+[[workflows.workflow]]
+name = "Check Migration Files"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "ls -l migrations/versions"
+
+[[workflows.workflow]]
+name = "Check Table Structure"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = """
+
+PGPASSWORD=$PGPASSWORD psql -h $PGHOST -p $PGPORT -U $PGUSER -d $PGDATABASE -c \"
+SELECT table_name, column_name, data_type, character_maximum_length
+FROM information_schema.columns
+WHERE table_name IN ('user', 'game_progress')
+ORDER BY table_name, ordinal_position;\"
+"""
 
 [deployment]
 run = ["sh", "-c", "python main.py"]

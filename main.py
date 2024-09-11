@@ -1,8 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_migrate import Migrate
 from flask_login import LoginManager
 import os
 from extensions import db
+from sqlalchemy import text
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', os.urandom(24))
@@ -32,6 +33,15 @@ def load_user(user_id):
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/check_db')
+def check_db():
+    try:
+        result = db.session.execute(text('SELECT table_name FROM information_schema.tables WHERE table_schema = \'public\''))
+        tables = [row[0] for row in result]
+        return jsonify({"status": "success", "tables": tables})
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
