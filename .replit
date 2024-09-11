@@ -194,7 +194,7 @@ agentRequireRestartOnSave = false
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "FLASK_APP=main.py flask db migrate -m 'Initial migration'"
+args = "FLASK_APP=main.py flask db migrate -m 'Increase password_hash length'"
 
 [[workflows.workflow]]
 name = "Apply Migration"

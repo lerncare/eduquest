@@ -12,18 +12,18 @@ def login():
 
 @auth.route('/login', methods=['POST'])
 def login_post():
-    benutzername = request.form.get('username')
-    passwort = request.form.get('password')
-    angemeldet_bleiben = True if request.form.get('remember') else False
+    username = request.form.get('username')
+    password = request.form.get('password')
+    remember = True if request.form.get('remember') else False
 
-    benutzer = User.query.filter_by(username=benutzername).first()
+    user = User.query.filter_by(username=username).first()
 
-    if not benutzer or not check_password_hash(benutzer.password_hash, passwort):
-        flash('Bitte überprüfe deine Anmeldedaten und versuche es erneut.')
+    if not user or not check_password_hash(user.password_hash, password):
+        flash('Please check your login details and try again.')
         return redirect(url_for('auth.login'))
 
-    login_user(benutzer, remember=angemeldet_bleiben)
-    return redirect(url_for('spiele.profil'))
+    login_user(user, remember=remember)
+    return redirect(url_for('games.profile'))
 
 @auth.route('/register')
 def register():
@@ -31,28 +31,27 @@ def register():
 
 @auth.route('/register', methods=['POST'])
 def register_post():
-    benutzername = request.form.get('username')
+    username = request.form.get('username')
     email = request.form.get('email')
-    passwort = request.form.get('password')
+    password = request.form.get('password')
 
-    benutzer = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(email=email).first()
 
-    if benutzer:
-        flash('Diese E-Mail-Adresse ist bereits registriert.')
+    if user:
+        flash('Email address already exists')
         return redirect(url_for('auth.register'))
 
-    neuer_benutzer = User(username=benutzername, email=email)
-    neuer_benutzer.set_password(passwort)
+    new_user = User(username=username, email=email)
+    new_user.set_password(password)
 
-    db.session.add(neuer_benutzer)
+    db.session.add(new_user)
     db.session.commit()
 
-    flash('Dein Konto wurde erfolgreich erstellt. Du kannst dich jetzt anmelden.')
+    flash('Dein Konto wurde erstellt. Du bist registriert und kannst dich nun einloggen.')
     return redirect(url_for('auth.login'))
 
 @auth.route('/logout')
 @login_required
 def logout():
     logout_user()
-    flash('Du wurdest erfolgreich abgemeldet.')
     return redirect(url_for('index'))

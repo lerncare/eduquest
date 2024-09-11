@@ -4,11 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultDiv = document.getElementById('result');
     
     let tasks = [
-        {name: 'Arbeiten korrigieren', priority: 3},
-        {name: 'Unterricht vorbereiten', priority: 2},
-        {name: 'Lehrerkonferenz', priority: 1},
-        {name: 'Elterngespräch', priority: 2},
-        {name: 'Fortbildung', priority: 1}
+        {name: 'Grade papers', priority: 3},
+        {name: 'Prepare lesson', priority: 2},
+        {name: 'Staff meeting', priority: 1},
+        {name: 'Parent conference', priority: 2},
+        {name: 'Professional development', priority: 1}
     ];
     
     let currentTask = 0;
@@ -33,11 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (currentTask < tasks.length) {
             const task = tasks[currentTask];
             gameContainer.innerHTML = `
-                <h3>Aufgabe: ${task.name}</h3>
-                <p>Wähle die Priorität:</p>
-                <button onclick="choosePriority(1)">Niedrig</button>
-                <button onclick="choosePriority(2)">Mittel</button>
-                <button onclick="choosePriority(3)">Hoch</button>
+                <h3>Task: ${task.name}</h3>
+                <p>Choose the priority:</p>
+                <button onclick="choosePriority(1)">Low</button>
+                <button onclick="choosePriority(2)">Medium</button>
+                <button onclick="choosePriority(3)">High</button>
             `;
         } else {
             endGame();
@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const task = tasks[currentTask];
         if (priority === task.priority) {
             score++;
-            resultDiv.textContent = "Richtig!";
+            resultDiv.textContent = "Correct!";
             resultDiv.style.color = 'green';
         } else {
-            resultDiv.textContent = "Falsch. Die richtige Priorität war " + 
-                (task.priority === 1 ? "Niedrig" : task.priority === 2 ? "Mittel" : "Hoch");
+            resultDiv.textContent = "Incorrect. The correct priority was " + 
+                (task.priority === 1 ? "Low" : task.priority === 2 ? "Medium" : "High");
             resultDiv.style.color = 'red';
         }
         currentTask++;
@@ -60,9 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function endGame() {
-        gameContainer.innerHTML = `<h2>Spiel beendet!</h2><p>Deine Punktzahl: ${score}/${tasks.length}</p>`;
+        gameContainer.innerHTML = `<h2>Game Over!</h2><p>Your score: ${score}/${tasks.length}</p>`;
         startButton.style.display = 'block';
-        startButton.textContent = 'Erneut spielen';
+        startButton.textContent = 'Play Again';
     }
     
     startButton.addEventListener('click', startGame);

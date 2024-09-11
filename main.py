@@ -20,10 +20,10 @@ login_manager.init_app(app)
 
 from models import User
 from auth import auth as auth_blueprint
-from games import spiele as spiele_blueprint
+from games import games as games_blueprint
 
 app.register_blueprint(auth_blueprint)
-app.register_blueprint(spiele_blueprint)
+app.register_blueprint(games_blueprint)
 
 @login_manager.user_loader
 def load_user(user_id):
