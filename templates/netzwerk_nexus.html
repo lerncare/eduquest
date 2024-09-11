@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mt-5">Netzwerk-Nexus</h2>
+<p>Aktuelles Level: {{ progress.level }}</p>
+<p>Punktzahl: {{ progress.score }}</p>
+
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Ideen-Inkubator</h5>
+                <p class="card-text">Tausche Ideen aus und entwickle sie gemeinsam weiter.</p>
+                <a href="{{ url_for('spiele.ideen_inkubator') }}" class="btn btn-primary">Zum Ideen-Inkubator</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Mentoring-Maze</h5>
+                <p class="card-text">Finde einen Mentor oder werde selbst zum Mentor.</p>
+                <a href="{{ url_for('spiele.mentoring_maze') }}" class="btn btn-primary">Zum Mentoring-Maze</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Ressourcen-Roulette</h5>
+                <p class="card-text">Teile und entdecke nützliche Unterrichtsmaterialien.</p>
+                <a href="{{ url_for('spiele.ressourcen_roulette') }}" class="btn btn-primary">Zum Ressourcen-Roulette</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// You can add JavaScript here to handle any dynamic functionality for the Netzwerk-Nexus main page
+</script>
+
+{% endblock %}

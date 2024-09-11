@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mt-5">Mentoring-Maze</h2>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <h3>Mentoren</h3>
+        <div id="mentors-list">
+            {% for user in users %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ user.username }}</h5>
+                    <p class="card-text">Erfahrungsstufe: {{ user.experience_level }}</p>
+                    <button class="btn btn-primary request-mentoring" data-user-id="{{ user.id }}">Mentoring anfragen</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h3>Deine Mentoring-Anfragen</h3>
+        <div id="mentoring-requests">
+            {% for request in mentoring_requests %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Mentor: {{ request.mentor.username }}</h5>
+                    <p class="card-text">Status: {{ request.status }}</p>
+                    <p class="card-text"><small class="text-muted">Angefragt am: {{ request.created_at.strftime('%d.%m.%Y %H:%M') }}</small></p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+document.querySelectorAll('.request-mentoring').forEach(button => {
+    button.addEventListener('click', function() {
+        const userId = this.getAttribute('data-user-id');
+        fetch('{{ url_for("spiele.request_mentoring") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({mentor_id: userId}),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                location.reload();
+            } else {
+                alert(data.message || 'Fehler beim Senden der Mentoring-Anfrage. Bitte versuche es erneut.');
+            }
+        });
+    });
+});
+
+function updateMentoringRequests() {
+    fetch('{{ url_for("spiele.get_mentoring_requests") }}')
+    .then(response => response.json())
+    .then(data => {
+        const requestsContainer = document.getElementById('mentoring-requests');
+        requestsContainer.innerHTML = '';
+        data.forEach(request => {
+            const requestElement = document.createElement('div');
+            requestElement.className = 'card mb-3';
+            requestElement.innerHTML = `
+                <div class="card-body">
+                    <h5 class="card-title">Mentor: ${request.mentor_name}</h5>
+                    <p class="card-text">Status: ${request.status}</p>
+                    <p class="card-text"><small class="text-muted">Angefragt am: ${request.created_at}</small></p>
+                </div>
+            `;
+            requestsContainer.appendChild(requestElement);
+        });
+    });
+}
+
+// Update mentoring requests every 30 seconds
+setInterval(updateMentoringRequests, 30000);
+</script>
+{% endblock %}

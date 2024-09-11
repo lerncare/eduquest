@@ -172,7 +172,7 @@ agentRequireRestartOnSave = false
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "FLASK_APP=main.py flask db migrate -m 'Initial migration'"
+args = "FLASK_APP=main.py flask db migrate -m 'Add experience_level to User model'"
 
 [[workflows.workflow]]
 name = "Clean Migrations"
