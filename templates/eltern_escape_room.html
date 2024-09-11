@@ -6,17 +6,16 @@
 <p>Punktestand: {{ progress.score }}</p>
 
 <div class="game-container">
-    <h3>Empathie-Enigma: Emoji-Decoder</h3>
-    <p>Entschlüsseln Sie die Anliegen der Eltern anhand der Emojis!</p>
-
-    <div id="game-area" class="mt-4">
-        <div id="emoji-display"></div>
-        <input type="text" id="user-answer" placeholder="Ihre Interpretation">
-        <button id="submit-answer" class="btn btn-primary mt-3">Antwort einreichen</button>
+    <h3>Willkommen im Eltern-Escape-Room!</h3>
+    <p>Hier können Sie Ihre Kommunikationsfähigkeiten mit Eltern in herausfordernden Situationen trainieren.</p>
+    
+    <div class="mt-4">
+        <h4>Verfügbare Herausforderungen:</h4>
+        <ul>
+            <li>Empathie-Enigma: Entschlüsseln Sie die Anliegen der Eltern</li>
+            <li>Feedback-Fabrik: Üben Sie positive Formulierungen</li>
+            <li>Protokoll-Parcours: Meistern Sie die Kunst der Gesprächsführung</li>
+        </ul>
     </div>
-
-    <div id="result" class="mt-3"></div>
 </div>
-
-<script src="{{ url_for('static', filename='js/empathie_enigma.js') }}"></script>
 {% endblock %}

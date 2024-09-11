@@ -2,115 +2,26 @@
 
 {% block content %}
 <h2 class="mt-5">Admin-Archipel: Inselreich der Verwaltung</h2>
-<p>Current Level: {{ progress.level }}</p>
-<p>Score: {{ progress.score }}</p>
+<p>Aktuelles Level: {{ progress.level }}</p>
+<p>Punktestand: {{ progress.score }}</p>
 
 <div class="game-container">
     <h3>Willkommen im Admin-Archipel!</h3>
-    <p>Meistere administrative Aufgaben und verwalte dein eigenes Inselreich.</p>
+    <p>Hier können Sie Ihre Verwaltungsfähigkeiten trainieren und verbessern.</p>
     
     <div id="game-area" class="mt-4">
-        <div id="island-map" style="width: 500px; height: 300px; background-color: #87CEEB; position: relative; margin: 0 auto;">
-            <!-- Islands will be dynamically added here -->
-        </div>
-        <button id="start-game" class="btn btn-primary mt-3">Spiel starten</button>
+        <!-- Game content will be added here -->
     </div>
     
-    <div id="task-description" class="mt-3"></div>
+    <button id="start-game" class="btn btn-primary mt-3">Spiel starten</button>
     <div id="result" class="mt-3"></div>
 </div>
 
 <script>
-let gameActive = false;
-let currentTask = null;
-let startTime;
-
-const tasks = [
-    { id: 1, name: "Stundenplan erstellen", difficulty: 1, island: { x: 50, y: 50, size: 40 } },
-    { id: 2, name: "Elternbriefe verfassen", difficulty: 2, island: { x: 150, y: 100, size: 50 } },
-    { id: 3, name: "Schulausflug organisieren", difficulty: 3, island: { x: 300, y: 75, size: 60 } },
-    { id: 4, name: "Notenverwaltung", difficulty: 2, island: { x: 400, y: 200, size: 45 } },
-    { id: 5, name: "Lehrerkonferenz vorbereiten", difficulty: 3, island: { x: 200, y: 220, size: 55 } }
-];
-
-document.getElementById('start-game').addEventListener('click', startGame);
-
-function startGame() {
-    if (gameActive) return;
-    gameActive = true;
-    document.getElementById('start-game').style.display = 'none';
-    document.getElementById('result').textContent = '';
-    renderIslands();
-    nextTask();
-}
-
-function renderIslands() {
-    const islandMap = document.getElementById('island-map');
-    islandMap.innerHTML = '';
-    tasks.forEach(task => {
-        const island = document.createElement('div');
-        island.style.position = 'absolute';
-        island.style.left = `${task.island.x}px`;
-        island.style.top = `${task.island.y}px`;
-        island.style.width = `${task.island.size}px`;
-        island.style.height = `${task.island.size}px`;
-        island.style.borderRadius = '50%';
-        island.style.backgroundColor = '#00A86B';
-        island.style.cursor = 'pointer';
-        island.title = task.name;
-        island.onclick = () => selectTask(task);
-        islandMap.appendChild(island);
-    });
-}
-
-function selectTask(task) {
-    if (!gameActive || currentTask) return;
-    currentTask = task;
-    document.getElementById('task-description').textContent = `Aufgabe: ${task.name}`;
-    startTime = Date.now();
-    setTimeout(() => {
-        if (currentTask === task) {
-            completeTask(task);
-        }
-    }, task.difficulty * 5000); // Task duration based on difficulty
-}
-
-function completeTask(task) {
-    if (!gameActive) return;
-    gameActive = false;
-    const endTime = Date.now();
-    const completionTime = (endTime - startTime) / 1000;
-    
-    fetch('{{ url_for("games.submit_task") }}', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `task_id=${task.id}&completion_time=${completionTime}`
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            document.getElementById('result').textContent = `Aufgabe abgeschlossen! Zeit: ${completionTime.toFixed(2)} Sekunden`;
-        }
-    });
-    
-    currentTask = null;
-    document.getElementById('task-description').textContent = '';
-    document.getElementById('start-game').style.display = 'block';
-}
-
-function nextTask() {
-    if (!gameActive) return;
-    const availableTasks = tasks.filter(task => task !== currentTask);
-    if (availableTasks.length > 0) {
-        const nextTask = availableTasks[Math.floor(Math.random() * availableTasks.length)];
-        selectTask(nextTask);
-    } else {
-        gameActive = false;
-        document.getElementById('result').textContent = 'Alle Aufgaben abgeschlossen!';
-        document.getElementById('start-game').style.display = 'block';
-    }
-}
+// Basic game logic will be implemented here
+document.getElementById('start-game').addEventListener('click', function() {
+    alert('Das Spiel beginnt!');
+    // Implement game logic here
+});
 </script>
 {% endblock %}

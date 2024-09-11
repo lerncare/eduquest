@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mt-5">Zeitmanagement-Tetris</h2>
+<p>Aktueller Score: <span id="current-score">{{ progress.score }}</span></p>
+
+<div class="game-container">
+    <div id="tetris-container" style="width: 300px; height: 600px; border: 1px solid black; position: relative; margin: 0 auto;">
+        <!-- The Tetris game will be rendered here -->
+    </div>
+    <div class="mt-3">
+        <button id="start-game" class="btn btn-primary">Spiel starten</button>
+        <button id="pause-game" class="btn btn-secondary">Pause</button>
+    </div>
+    <div id="next-task" class="mt-3">
+        <h4>Nächste Aufgabe:</h4>
+        <p id="next-task-description"></p>
+    </div>
+    <div id="game-over" class="mt-3" style="display: none;">
+        <h3>Spiel beendet</h3>
+        <p>Dein finaler Score: <span id="final-score"></span></p>
+        <button id="restart-game" class="btn btn-primary">Erneut spielen</button>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/zeitmanagement_tetris.js') }}"></script>
+{% endblock %}
