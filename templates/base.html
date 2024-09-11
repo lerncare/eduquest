@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduQuest: Lehrkraft-Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
@@ -23,7 +24,7 @@
                     <a class="nav-link" href="{{ url_for('games.profile') }}">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('games.mindmaster') }}">DenkMeister</a>
+                    <a class="nav-link" href="{{ url_for('games.mindmaster') }}">MindMaster</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('games.resourcerally') }}">Ressourcen-Rallye</a>
@@ -52,7 +53,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container mt-4">
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             <div class="blitz-meldungen">

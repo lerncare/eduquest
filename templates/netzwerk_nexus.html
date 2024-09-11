@@ -12,10 +12,18 @@
     <div class="mt-4">
         <h4>Verfügbare Funktionen:</h4>
         <ul>
-            <li>Ideen-Inkubator - Teilen und bewerten Sie innovative Lehrideen</li>
-            <li>Mentoring-Labyrinth - Navigieren Sie durch Herausforderungen als Mentor oder Mentee</li>
+            <li><a href="{{ url_for('games.ideen_inkubator') }}">Ideen-Inkubator</a> - Teilen und bewerten Sie innovative Lehrideen</li>
+            <li><a href="{{ url_for('games.mentoring_maze') }}">Mentoring-Labyrinth</a> - Navigieren Sie durch Herausforderungen als Mentor oder Mentee</li>
             <li>Ressourcen-Roulette - Tauschen Sie schnell Unterrichtsmaterialien mit anderen Pädagogen aus</li>
         </ul>
     </div>
+</div>
+
+<div class="mt-4">
+    <h4>Navigation:</h4>
+    <a href="{{ url_for('games.mindmaster') }}" class="btn btn-primary mr-2">MindMaster</a>
+    <a href="{{ url_for('games.resourcerally') }}" class="btn btn-primary mr-2">Ressourcen-Rallye</a>
+    <a href="{{ url_for('games.zen_zone') }}" class="btn btn-primary mr-2">Zen-Zone</a>
+    <a href="{{ url_for('games.eltern_escape_room') }}" class="btn btn-primary">Eltern-Escape-Room</a>
 </div>
 {% endblock %}

@@ -5,6 +5,36 @@
 <p>Current Level: {{ progress.level }}</p>
 <p>Score: {{ progress.score }}</p>
 
+<div class="game-explanations mt-4">
+    <h4>Spielerklärungen:</h4>
+    <ul>
+        <li>
+            <strong>Präfrontaler Cortex-Puzzle:</strong> 
+            <span class="explanation" data-toggle="tooltip" title="Trainiere deine Fähigkeit, Aufgaben zu priorisieren und logische Entscheidungen zu treffen.">
+                Ordne Aufgaben nach ihrer Wichtigkeit und verbessere deine Entscheidungsfähigkeit.
+            </span>
+        </li>
+        <li>
+            <strong>Hippocampus-Herausforderung:</strong>
+            <span class="explanation" data-toggle="tooltip" title="Schärfe dein Gedächtnis und lerne, deine Zeit effektiver einzuteilen.">
+                Teste dein Zeitmanagement und Erinnerungsvermögen in diesem spannenden Gedächtnisspiel.
+            </span>
+        </li>
+        <li>
+            <strong>Amygdala-Arena:</strong>
+            <span class="explanation" data-toggle="tooltip" title="Lerne, in herausfordernden Situationen ruhig zu bleiben und angemessen zu reagieren.">
+                Meistere emotionale Herausforderungen und verbessere deine Fähigkeit zur Deeskalation.
+            </span>
+        </li>
+        <li>
+            <strong>Emotionale Intelligenz-Trainer:</strong>
+            <span class="explanation" data-toggle="tooltip" title="Entwickle ein tieferes Verständnis für Emotionen und verbessere deine zwischenmenschlichen Fähigkeiten.">
+                Erkenne und reagiere angemessen auf verschiedene emotionale Szenarien im Schulalltag.
+            </span>
+        </li>
+    </ul>
+</div>
+
 <div class="game-container">
     <h3>Präfrontaler Cortex-Puzzle</h3>
     <div id="puzzle-container"></div>
@@ -32,7 +62,20 @@
     <a href="{{ url_for('games.emotionale_intelligenz') }}" class="btn btn-primary">Zum Emotionale Intelligenz-Trainer</a>
 </div>
 
+<div class="mt-4">
+    <h4>Navigation:</h4>
+    <a href="{{ url_for('games.resourcerally') }}" class="btn btn-primary mr-2">Ressourcen-Rallye</a>
+    <a href="{{ url_for('games.zen_zone') }}" class="btn btn-primary mr-2">Zen-Zone</a>
+    <a href="{{ url_for('games.netzwerk_nexus') }}" class="btn btn-primary mr-2">Netzwerk-Nexus</a>
+    <a href="{{ url_for('games.eltern_escape_room') }}" class="btn btn-primary">Eltern-Escape-Room</a>
+</div>
+
 <script src="{{ url_for('static', filename='js/mindmaster.js') }}"></script>
 <script src="{{ url_for('static', filename='js/hippocampus_game.js') }}"></script>
 <script src="{{ url_for('static', filename='js/amygdala_game.js') }}"></script>
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
 {% endblock %}

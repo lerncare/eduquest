@@ -1,35 +1,95 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     margin: 0;
     padding: 0;
+    background-color: #1a1a2e;
+    color: #ffffff;
 }
 
 .container {
-    width: 80%;
+    width: 90%;
     margin: auto;
     overflow: hidden;
     padding: 20px;
 }
 
+.navbar {
+    background-color: #16213e !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand, .nav-link {
+    color: #00fff2 !important;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover, .nav-link:hover {
+    color: #ff00ff !important;
+}
+
+.btn-primary {
+    background-color: #00fff2;
+    border-color: #00fff2;
+    color: #1a1a2e;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #ff00ff;
+    border-color: #ff00ff;
+    color: #ffffff;
+}
+
 .game-container {
-    border: 1px solid #ddd;
+    background-color: #16213e;
+    border: 1px solid #00fff2;
+    border-radius: 10px;
     padding: 20px;
     margin-top: 20px;
-    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,255,242,0.1);
 }
 
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background: #333;
-    color: #fff;
-    text-decoration: none;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+h1, h2, h3, h4, h5, h6 {
+    color: #00fff2;
 }
 
-.btn:hover {
-    background: #555;
+.progress {
+    background-color: #16213e;
+}
+
+.progress-bar {
+    background-color: #00fff2;
+}
+
+.list-group-item {
+    background-color: #16213e;
+    border-color: #00fff2;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: #00fff2;
+    color: #1a1a2e;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 255, 242, 0.3);
+}
+
+.list-group-item:hover h5,
+.list-group-item:hover p {
+    color: #1a1a2e;
+}
+
+.tooltip-inner {
+    background-color: #00fff2;
+    color: #1a1a2e;
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before, .tooltip.bs-tooltip-top .arrow::before {
+    border-top-color: #00fff2;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 255, 242, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }

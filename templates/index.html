@@ -32,4 +32,15 @@
     <a href="{{ url_for('auth.login') }}" class="btn btn-outline-primary btn-lg">Anmelden</a>
 </div>
 {% endif %}
+
+{% if current_user.is_authenticated %}
+<div class="mt-4">
+    <h4>Navigation:</h4>
+    <a href="{{ url_for('games.mindmaster') }}" class="btn btn-primary mr-2">MindMaster</a>
+    <a href="{{ url_for('games.resourcerally') }}" class="btn btn-primary mr-2">Ressourcen-Rallye</a>
+    <a href="{{ url_for('games.zen_zone') }}" class="btn btn-primary mr-2">Zen-Zone</a>
+    <a href="{{ url_for('games.netzwerk_nexus') }}" class="btn btn-primary mr-2">Netzwerk-Nexus</a>
+    <a href="{{ url_for('games.eltern_escape_room') }}" class="btn btn-primary">Eltern-Escape-Room</a>
+</div>
+{% endif %}
 {% endblock %}
