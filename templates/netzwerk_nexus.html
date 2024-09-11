@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mt-5">Netzwerk-Nexus: Kollaborations-Hub</h2>
+<p>Aktuelles Level: {{ progress.level }}</p>
+<p>Punktestand: {{ progress.score }}</p>
+
+<div class="game-container">
+    <h3>Willkommen im Kollaborations-Hub!</h3>
+    <p>Hier können Sie sich mit anderen Lehrern verbinden, Ideen austauschen und an Projekten zusammenarbeiten.</p>
+    
+    <div class="mt-4">
+        <h4>Verfügbare Funktionen:</h4>
+        <ul>
+            <li><a href="{{ url_for('games.ideen_inkubator') }}">Ideen-Inkubator</a> - Teilen und bewerten Sie innovative Lehrideen</li>
+            <li><a href="{{ url_for('games.mentoring_maze') }}">Mentoring-Labyrinth</a> - Navigieren Sie durch Herausforderungen als Mentor oder Mentee</li>
+            <li>Ressourcen-Roulette (Demnächst verfügbar) - Tauschen Sie schnell Unterrichtsmaterialien mit anderen Pädagogen aus</li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

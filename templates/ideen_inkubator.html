@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mt-5">Ideen-Inkubator</h2>
+
+<div class="game-container">
+    <h3>Share and Vote on Innovative Teaching Ideas</h3>
+    
+    <div id="idea-submission" class="mt-4">
+        <h4>Submit Your Idea:</h4>
+        <form id="idea-form">
+            <div class="form-group">
+                <textarea class="form-control" id="idea-content" rows="3" placeholder="Enter your teaching idea here..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Idea</button>
+        </form>
+    </div>
+
+    <div id="idea-list" class="mt-5">
+        <h4>Current Ideas:</h4>
+        <ul class="list-group">
+            {% for idea in ideas %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ idea.content }}
+                <span class="badge badge-primary badge-pill">Votes: {{ idea.votes }}</span>
+                <button class="btn btn-sm btn-outline-primary vote-btn" data-idea-id="{{ idea.id }}">Vote</button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script>
+document.getElementById('idea-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var ideaContent = document.getElementById('idea-content').value;
+    fetch('{{ url_for("games.submit_idea") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'idea=' + encodeURIComponent(ideaContent)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert(data.message);
+            document.getElementById('idea-content').value = '';
+            // In a real application, you would update the idea list here
+        }
+    });
+});
+
+document.querySelectorAll('.vote-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        var ideaId = this.getAttribute('data-idea-id');
+        fetch('{{ url_for("games.vote_idea") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'idea_id=' + encodeURIComponent(ideaId)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                // In a real application, you would update the vote count here
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

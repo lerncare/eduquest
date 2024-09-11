@@ -1,11 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2 class="mt-5">Ressourcen-Rallye: Arbeitsbelastungs-Labyrinth</h2>
+<h2 class="mt-5">Ressourcen-Rallye: Ressourcenmanagement-Herausforderung</h2>
 <p>Current Level: {{ progress.level }}</p>
 <p>Score: {{ progress.score }}</p>
-<div id="game-container" class="game-container"></div>
-<button id="start-game" class="btn btn-primary mt-3">Start Game</button>
+
+<div class="game-container">
+    <h3>Willkommen bei der Ressourcen-Rallye!</h3>
+    <p>Hier kannst du deine Fähigkeiten im Ressourcenmanagement verbessern.</p>
+    
+    <div class="mt-4">
+        <h4>Verfügbare Herausforderungen:</h4>
+        <ul>
+            <li><a href="#" id="start-arbeitsbelastung">Arbeitsbelastungs-Labyrinth</a> - Bewältige deine Arbeitsbelastung effektiv</li>
+            <li><a href="{{ url_for('games.verhaltens_vortex') }}">Verhaltens-Vortex</a> - Trainiere deine Reaktionsfähigkeit</li>
+            <li><a href="{{ url_for('games.admin_archipel') }}">Admin-Archipel</a> - Meistere administrative Aufgaben</li>
+        </ul>
+    </div>
+</div>
+
+<div id="game-container" class="game-container mt-4"></div>
+<button id="start-game" class="btn btn-primary mt-3" style="display: none;">Spiel starten</button>
 <div id="result" class="mt-3"></div>
 
 <script src="{{ url_for('static', filename='js/resourcerally.js') }}"></script>

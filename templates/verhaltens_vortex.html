@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mt-5">Verhaltens-Vortex: Reaktionsspiel</h2>
+<p>Current Level: {{ progress.level }}</p>
+<p>Score: {{ progress.score }}</p>
+
+<div class="game-container">
+    <h3>Willkommen beim Verhaltens-Vortex!</h3>
+    <p>In diesem Spiel trainierst du deine Reaktionsfähigkeit und lernst, positive Verstärkung anzuwenden.</p>
+    
+    <div id="game-area" class="mt-4">
+        <div id="stimulus" style="width: 100px; height: 100px; background-color: red; margin: 0 auto;"></div>
+        <button id="start-game" class="btn btn-primary mt-3">Spiel starten</button>
+    </div>
+    
+    <div id="result" class="mt-3"></div>
+</div>
+
+<script>
+let gameActive = false;
+let startTime;
+let timeoutId;
+
+document.getElementById('start-game').addEventListener('click', startGame);
+
+function startGame() {
+    if (gameActive) return;
+    gameActive = true;
+    document.getElementById('start-game').style.display = 'none';
+    document.getElementById('result').textContent = '';
+    document.getElementById('stimulus').style.backgroundColor = 'red';
+    
+    // Random delay between 1 and 5 seconds
+    const delay = Math.floor(Math.random() * 4000) + 1000;
+    timeoutId = setTimeout(showStimulus, delay);
+}
+
+function showStimulus() {
+    document.getElementById('stimulus').style.backgroundColor = 'green';
+    startTime = Date.now();
+    document.getElementById('stimulus').onclick = handleClick;
+}
+
+function handleClick() {
+    if (!gameActive) return;
+    gameActive = false;
+    const endTime = Date.now();
+    const reactionTime = endTime - startTime;
+    
+    document.getElementById('stimulus').onclick = null;
+    document.getElementById('stimulus').style.backgroundColor = 'red';
+    document.getElementById('start-game').style.display = 'block';
+    
+    // Send reaction time to server
+    fetch('{{ url_for("games.submit_reaction") }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `reaction_time=${reactionTime}&correct=true`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById('result').textContent = `Gut gemacht! Deine Reaktionszeit: ${reactionTime}ms`;
+        }
+    });
+}
+
+// Handle early clicks
+document.getElementById('stimulus').addEventListener('click', function() {
+    if (gameActive && document.getElementById('stimulus').style.backgroundColor === 'red') {
+        gameActive = false;
+        clearTimeout(timeoutId);
+        document.getElementById('start-game').style.display = 'block';
+        document.getElementById('result').textContent = 'Zu früh! Warte, bis die Farbe sich ändert.';
+        
+        // Send early click to server
+        fetch('{{ url_for("games.submit_reaction") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'reaction_time=0&correct=false'
+        });
+    }
+});
+</script>
+{% endblock %}

@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, jsonify, request
 from flask_login import login_required, current_user
-from models import GameProgress
+from models import GameProgress, User
 from extensions import db
 
 games = Blueprint('games', __name__)
@@ -20,22 +20,23 @@ def mindmaster():
         db.session.commit()
     return render_template('mindmaster.html', progress=progress)
 
-@games.route('/resourcerally')
+@games.route('/emotionale_intelligenz')
 @login_required
-def resourcerally():
-    progress = GameProgress.query.filter_by(user_id=current_user.id, game_name='resourcerally').first()
+def emotionale_intelligenz():
+    progress = GameProgress.query.filter_by(user_id=current_user.id, game_name='emotionale_intelligenz').first()
     if not progress:
-        progress = GameProgress(user_id=current_user.id, game_name='resourcerally')
+        progress = GameProgress(user_id=current_user.id, game_name='emotionale_intelligenz')
         db.session.add(progress)
         db.session.commit()
-    return render_template('resourcerally.html', progress=progress)
+    return render_template('emotionale_intelligenz.html', progress=progress)
 
-@games.route('/zen_zone')
+@games.route('/submit_ei_answer', methods=['POST'])
 @login_required
-def zen_zone():
-    progress = GameProgress.query.filter_by(user_id=current_user.id, game_name='zen_zone').first()
-    if not progress:
-        progress = GameProgress(user_id=current_user.id, game_name='zen_zone')
-        db.session.add(progress)
-        db.session.commit()
-    return render_template('zen_zone.html', progress=progress)
+def submit_ei_answer():
+    scenario_id = request.form.get('scenario_id')
+    user_answer = request.form.get('answer')
+    # Here you would typically check the answer and update the user's score
+    # For now, we'll just return a success message
+    return jsonify({'success': True, 'message': 'Antwort erfolgreich übermittelt!'})
+
+# ... (rest of the existing code)

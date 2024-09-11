@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mt-5">Mentoring-Labyrinth</h2>
+<p>Aktuelles Level: {{ progress.level }}</p>
+<p>Punktestand: {{ progress.score }}</p>
+
+<div class="game-container">
+    <h3>Willkommen im Mentoring-Labyrinth!</h3>
+    <p>Arbeiten Sie zusammen, um durch das Labyrinth zu navigieren und Herausforderungen zu meistern.</p>
+
+    <div id="game-area" class="mt-4">
+        <div id="maze-container" style="width: 500px; height: 500px; border: 1px solid black; position: relative; margin: 0 auto;"></div>
+        <button id="start-game" class="btn btn-primary mt-3">Spiel starten</button>
+    </div>
+
+    <div id="challenge-description" class="mt-3"></div>
+    <div id="result" class="mt-3"></div>
+</div>
+
+<script src="{{ url_for('static', filename='js/mentoring_maze.js') }}"></script>
+{% endblock %}
