@@ -1,0 +1,215 @@
+modules = ["python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Run Flask App"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Flask Migrate"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Remove Migrations"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Initialize Database"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Initialize Database Step 1"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Initialize Database Step 2"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Reinitialize Database"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Clean and Init DB"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Create and Apply Migration"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Create Migration"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Clean Migrations"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Create New Migration"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Apply Migration"
+
+[[workflows.workflow]]
+name = "Run Flask App"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py"
+waitForPort = 5000
+
+[[workflows.workflow]]
+name = "Flask Migrate"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "FLASK_APP=main.py flask db init && FLASK_APP=main.py flask db migrate -m 'Initial migration' && FLASK_APP=main.py flask db upgrade"
+
+[[workflows.workflow]]
+name = "Remove Migrations"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf migrations && FLASK_APP=main.py flask db init && FLASK_APP=main.py flask db migrate -m 'Initial migration' && FLASK_APP=main.py flask db upgrade"
+
+[[workflows.workflow]]
+name = "Initialize Database"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "flask db init && flask db migrate -m 'Initial migration' && flask db upgrade"
+
+[[workflows.workflow]]
+name = "Initialize Database Step 1"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf migrations && FLASK_APP=main.py flask db init"
+
+[[workflows.workflow]]
+name = "Initialize Database Step 2"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "FLASK_APP=main.py flask db migrate -m 'Initial migration'"
+
+[[workflows.workflow]]
+name = "Reinitialize Database"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf migrations && FLASK_APP=main.py flask db init && FLASK_APP=main.py flask db migrate -m 'Initial migration' && FLASK_APP=main.py flask db upgrade"
+
+[[workflows.workflow]]
+name = "Clean and Init DB"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf migrations && FLASK_APP=main.py flask db init"
+
+[[workflows.workflow]]
+name = "Create and Apply Migration"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "FLASK_APP=main.py flask db migrate -m 'Initial migration' && FLASK_APP=main.py flask db upgrade"
+
+[[workflows.workflow]]
+name = "Create Migration"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "FLASK_APP=main.py flask db migrate -m 'Initial migration'"
+
+[[workflows.workflow]]
+name = "Clean Migrations"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "rm -rf migrations && FLASK_APP=main.py flask db init"
+
+[[workflows.workflow]]
+name = "Create New Migration"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "FLASK_APP=main.py flask db migrate -m 'Initial migration'"
+
+[[workflows.workflow]]
+name = "Apply Migration"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "FLASK_APP=main.py flask db upgrade"
+
+[deployment]
+run = ["sh", "-c", "python main.py"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
